@@ -14,7 +14,13 @@ exports.shorten = async (req, res, next) => {
   next();
 };
 
+exports.notFavicon = (req, res, next) => {
+  if (req.params.id == 'favicon.ico') return;
+  next();
+};
+
 exports.redirectPage = async (req, res) => {
+  console.log('HELLO??', req.params.id);
   const originalURL = await URL.findOne({ urlId: req.params.id });
   res.redirect(originalURL.url);
 };
