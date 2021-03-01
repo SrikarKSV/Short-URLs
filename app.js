@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 
+const homeRouter = require('./routes/homeRouter');
+
 const app = express();
 
 app.set('view engine', 'pug');
@@ -18,5 +20,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+app.use('/', homeRouter);
 
 module.exports = app;
