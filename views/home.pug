@@ -1,0 +1,7 @@
+extends layout 
+
+block content 
+  form(action="/shorten", method="post")
+    label(for="url") Enter URL to shorten 
+    input(type="text", name="url" id="url")
+    input(type="submit", value="Shorten URL →")
