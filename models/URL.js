@@ -15,6 +15,6 @@ urlSchema.pre('save', function (next) {
   next();
 });
 
-const urlModel = mongoose.model('URLs', urlSchema);
+const urlModel = mongoose.model('URL', urlSchema);
 
 module.exports = urlModel;
