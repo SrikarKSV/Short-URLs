@@ -18,11 +18,9 @@ exports.checkShortenBody = (req, res, next) => {
   const urlErrors = urls.map((url) =>
     validator.isURL(url.trim(), { require_protocol: true })
   );
-  // TODO: Find out why date is not valid
-  // const expiryError =
-  //   expiryDate === 'permanent' || validator.isDate(expiryDate);
-  //  || !expiryError
-  if (!urlErrors.every(Boolean)) {
+  const expiryError =
+    expiryDate === 'permanent' || validator.isDate(new Date(expiryDate));
+  if (!urlErrors.every(Boolean) || !expiryError) {
     req.flash('error', 'One of the URL(s) or expiry date is not valid');
     return res.status(400).render('home', { flashes: req.flash(), urls: url });
   }
