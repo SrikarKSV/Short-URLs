@@ -4,4 +4,15 @@ block content
   form(method="post")
     label(for="url") Enter URL to shorten 
     input(type="text", name="url" id="url" required value=urls)
+    h2 Choose expiry date 
+    label(for="perm") Permanent
+    input(type="radio" name="expiryDate" id="perm" value="permanent" required)
+    br
+    label(for="custom") Custom
+    input(type="radio", name="expiryDate" id="custom" required)
+    label(for="datetime" hidden) Select Custom expiry date 
+    input(type="datetime-local" id="datetime" required disabled)
     input(type="submit", value="Shorten URL →")
+
+block scripts 
+  script(src="js/form.js") 

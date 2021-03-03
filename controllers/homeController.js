@@ -9,26 +9,31 @@ exports.home = (req, res) => {
 };
 
 exports.checkShortenBody = (req, res, next) => {
-  if (!req.body?.url) {
-    req.flash('error', 'You need to provide a URL(s)');
+  if (!req.body?.url && !req.body?.expiryDate) {
+    req.flash('error', 'You need to provide a URL(s) and expiry date!');
     return res.status(400).render('home', { flashes: req.flash() });
   }
-  const urls = req.body.url.split(',').map((url) => url.trim());
-  const errors = urls.map((url) =>
+  const { url, expiryDate } = req.body;
+  const urls = url.split(',').map((url) => url.trim());
+  const urlErrors = urls.map((url) =>
     validator.isURL(url.trim(), { require_protocol: true })
   );
-  if (!errors.every(Boolean)) {
-    req.flash('error', 'One of the URL(s) is not valid');
-    return res
-      .status(400)
-      .render('home', { flashes: req.flash(), urls: req.body.url });
+  // TODO: Find out why date is not valid
+  // const expiryError =
+  //   expiryDate === 'permanent' || validator.isDate(expiryDate);
+  //  || !expiryError
+  if (!urlErrors.every(Boolean)) {
+    req.flash('error', 'One of the URL(s) or expiry date is not valid');
+    return res.status(400).render('home', { flashes: req.flash(), urls: url });
   }
+  if (expiryDate === 'permanent') req.body.expiryDate = null;
   req.body.url = urls;
   next();
 };
 
 exports.shorten = async (req, res) => {
-  const createPromise = req.body.url.map((url) => URL.create({ url }));
+  let { url, expiryDate } = req.body;
+  const createPromise = url.map((url) => URL.create({ url, expiryDate }));
   const urlIds = await Promise.all(createPromise);
   const urlsPage = await UrlPage.create({
     urlIds: urlIds.map((id) => id._id),
@@ -56,12 +61,24 @@ exports.urlsPage = async (req, res, next) => {
 // Redirecting from the shortened link
 exports.redirectPage = async (req, res, next) => {
   const originalURL = await URL.findOne({ urlId: req.params.id });
+  const error = new ErrorResponse(
+    "Requested shortened link doesn't exist or expired.",
+    404
+  );
   if (!originalURL) {
-    return next(
-      new ErrorResponse("Requested shortened link doesn't exist.", 404)
-    );
+    return next(error);
   }
-  res.redirect(originalURL.url);
+  const { url, expiryDate } = originalURL;
+  // Redirect directly if permanent
+  if (expiryDate === null) return res.redirect(url);
+  console.log('HELLO!!');
+  // Check if link valid
+  if (Date.now() < new Date(expiryDate).getTime()) return res.redirect(url);
+  else {
+    // Drop the document if not valid
+    originalURL.remove();
+    next(error);
+  }
 };
 
 exports.notFavicon = (req, res, next) => {
