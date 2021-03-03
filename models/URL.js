@@ -9,6 +9,7 @@ const urlSchema = new mongoose.Schema({
     required: 'You need to provide a URL(s)',
     validate: [validator.isURL, 'One of the URL(s) is not valid'],
   },
+  expiryDate: Date,
   urlId: String,
 });
 
