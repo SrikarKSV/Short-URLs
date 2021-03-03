@@ -17,6 +17,7 @@ function sendErrorDev(err, req, res) {
   const errorDetails = {
     message: err.message,
     status: err.statusCode,
+    title: 'Something went wrong!',
     stackHighlighted: err.stack.replace(
       /[a-z_-\d]+.js:\d+:\d+/gi,
       '<mark>$&</mark>'
@@ -31,10 +32,11 @@ function sendErrorDev(err, req, res) {
   });
 }
 
-function sendErrorProd() {
+function sendErrorProd(err, req, res) {
   res.render('error', {
     message: err.message,
-    error: {},
+    status: err.statusCode,
+    title: 'Something went wrong!',
   });
 }
 
