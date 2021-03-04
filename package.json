@@ -4,7 +4,14 @@
   "description": "Abbreviate you URLs for easy sharing",
   "main": "server.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server.js"
+    "start": "node server.js",
+    "watch": "cross-env NODE_ENV=development nodemon server.js --ignore public/",
+    "assets": "parcel watch ./public/js/index.js --dist-dir ./public/dist",
+    "build": "parcel build ./public/js/index.js --dist-dir ./public/dist",
+    "dev": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name"
+  },
+  "targets": {
+    "main": false
   },
   "repository": {
     "type": "git",
