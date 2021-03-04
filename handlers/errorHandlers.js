@@ -42,9 +42,9 @@ function sendErrorProd(err, req, res) {
 
 exports.globalErrorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  if (process.env.NODE_ENV.trim() === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, req, res);
-  } else if (process.env.NODE_ENV.trim() === 'production') {
+  } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
     error.message = err.message;
     sendErrorProd(error, req, res);
