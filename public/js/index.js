@@ -1,3 +1,5 @@
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.css';
 import '../css/main.css';
 
 const allRadioBtn = document.querySelectorAll('input[type="radio"]');
@@ -9,7 +11,10 @@ allRadioBtn.forEach((radioBtn) => {
   });
 });
 
-dateTimeInput.addEventListener(
-  'input',
-  (e) => (allRadioBtn[1].value = e.target.value) // setting the value of custom expiry date
-);
+flatpickr('#datetime', {
+  enableTime: true,
+  minDate: Date.now(),
+  onChange: (selectedDates, dateStr, instance) => {
+    allRadioBtn[1].value = dateStr;
+  },
+});
