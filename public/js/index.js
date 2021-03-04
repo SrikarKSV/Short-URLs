@@ -1,3 +1,5 @@
+import '../css/main.css';
+
 const allRadioBtn = document.querySelectorAll('input[type="radio"]');
 const dateTimeInput = document.querySelector('#datetime');
 
