@@ -4,7 +4,7 @@
   "description": "Abbreviate you URLs for easy sharing",
   "main": "server.js",
   "scripts": {
-    "dev": "set NODE_ENV=development && nodemon server.js"
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -34,5 +34,8 @@
     "morgan": "^1.10.0",
     "pug": "^3.0.2",
     "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
