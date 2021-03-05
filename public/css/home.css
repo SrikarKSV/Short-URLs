@@ -28,6 +28,7 @@ h1 a {
   padding: 2.8em 8em;
   border-radius: var(--border-radius-lg);
   box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.25);
+  margin-bottom: 10px;
 }
 
 .form .light {
@@ -74,7 +75,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + label {
-  border: 3px solid var(--dark-green);
+  box-shadow: 0 0 0 3px var(--dark-green);
 }
 
 input[type="radio"]:checked + .expiry-label--perm::before {
@@ -89,4 +90,31 @@ input[type="radio"]:checked + .expiry-label--custom::before {
   background-repeat: no-repeat;
 }
 
-/* TODO: Style custom expiry tool and hide it */
+.custom-expiry-date {
+  max-height: 0;
+  overflow: hidden;
+  transform-origin: top left;
+  transition: 0.3s max-height linear;
+}
+
+.custom-expiry-date--expand {
+  max-height: 5rem;
+}
+
+/* custom datetime input */
+input[type="text"] {
+  padding: 0.3em;
+  font-size: 1rem;
+  width: 12rem;
+  border-radius: var(--border-radius-sm);
+  border: 3px solid var(--light-green);
+}
+
+input[type="submit"] {
+  margin-top: 0.8rem;
+  background: var(--dark-green);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5em;
+  cursor: pointer;
+}
