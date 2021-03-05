@@ -1,0 +1,12 @@
+mixin table(urlIds)
+  .table-container
+    table.links-table
+      thead 
+        tr 
+          th Original link
+          th Shortened
+      tbody 
+        each url in urlIds
+          tr
+            td= url.url
+            td= `http://localhost:4000/${url.urlId}`

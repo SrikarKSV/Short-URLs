@@ -1,0 +1,30 @@
+.inner .title {
+  margin-top: 1rem;
+}
+
+.warning {
+  color: var(--red);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.links-table {
+  margin-top: 2rem;
+  margin: auto;
+}
+
+.links-table th,
+.links-table td {
+  padding: 12px 15px;
+}
+
+.links-table thead tr {
+  background-color: var(--dark-green);
+  color: var(--white);
+}
+
+.links-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}

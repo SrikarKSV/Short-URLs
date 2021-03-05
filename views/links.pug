@@ -1,16 +1,12 @@
 extends layout 
 
+include mixins/_short-links-table
+
 block content
-  h1 List of the links
+  h3.title List of the shortened link
+  p ⚠️ #[span.warning Note : ] This page will only be available for 24 hours (links expire as configured)
   if urlIds && urlIds.length 
-    table 
-      tr 
-        th Original link
-        th Shortened
-      each url in urlIds
-        tr
-          td= url.url
-          td= `http://localhost:4000/${url.urlId}`
+    +table(urlIds)   
   else 
-    h2 Oops! Seems like the links expired already!
+    h3 Oops! Seems like the links expired already!
 
