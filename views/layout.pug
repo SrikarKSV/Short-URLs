@@ -13,7 +13,13 @@ html(lang="en")
       h1: a(href="/")  short URLs
       h4.tagline Shrink your lengthy links and share for free!
       if locals.flashes 
-        pre= JSON.stringify(locals.flashes, null, 2)
+        - const categories = Object.keys(locals.flashes)
+        each category in categories
+          each message in flashes[category]
+            .flash(class=`flash--${category}`)
+              p= message
+              button.flash__remove(onClick="this.parentElement.remove()") &times;
+        
       .inner
         block content
 
