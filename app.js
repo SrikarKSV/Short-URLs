@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const flash = require('connect-flash');
 const session = require('express-session');
+const MongoStore = require('connect-mongo').default;
 
 const homeRouter = require('./routes/homeRouter');
 const {
@@ -23,11 +24,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
 app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: DB }),
   })
 );
 
