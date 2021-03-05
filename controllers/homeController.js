@@ -5,7 +5,7 @@ const UrlPage = require('../models/UrlPage');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.home = (req, res) => {
-  res.render('home', { title: 'Home' });
+  res.render('home');
 };
 
 exports.checkShortenBody = (req, res, next) => {
@@ -21,7 +21,10 @@ exports.checkShortenBody = (req, res, next) => {
   const expiryError =
     expiryDate === 'permanent' || validator.isDate(new Date(expiryDate));
   if (!urlErrors.every(Boolean) || !expiryError) {
-    req.flash('error', 'One of the URL(s) or expiry date is not valid');
+    req.flash(
+      'error',
+      'One of the URL(s) or expiry date is not valid (make sure to add protocols to each URL)'
+    );
     return res.status(400).render('home', { flashes: req.flash(), urls: url });
   }
   if (expiryDate === 'permanent') req.body.expiryDate = null;
@@ -53,6 +56,9 @@ exports.urlsPage = async (req, res, next) => {
     );
   }
   const { urlIds } = shorturls;
+  urlIds.forEach(
+    (urlId) => (urlId.urlId = `http://localhost:4000/${urlId.urlId}`)
+  );
   res.render('links', { title: 'Links', urlIds });
 };
 
@@ -69,7 +75,6 @@ exports.redirectPage = async (req, res, next) => {
   const { url, expiryDate } = originalURL;
   // Redirect directly if permanent
   if (expiryDate === null) return res.redirect(url);
-  console.log('HELLO!!');
   // Check if link valid
   if (Date.now() < new Date(expiryDate).getTime()) return res.redirect(url);
   else {
