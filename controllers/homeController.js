@@ -18,8 +18,12 @@ exports.checkShortenBody = (req, res, next) => {
   const urlErrors = urls.map((url) =>
     validator.isURL(url.trim(), { require_protocol: true })
   );
+  // Checking if expiry date is permanent or temp
+  // If temp it is checked if the expiry date is in the future or not
   const expiryError =
-    expiryDate === 'permanent' || validator.isDate(new Date(expiryDate));
+    expiryDate === 'permanent' ||
+    (validator.isDate(new Date(expiryDate)) &&
+      !new Date(expiryDate) < Date.now());
   if (!urlErrors.every(Boolean) || !expiryError) {
     req.flash(
       'error',
