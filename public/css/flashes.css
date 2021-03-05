@@ -1,6 +1,6 @@
 .flash {
   max-width: 40rem;
-  margin: 5px auto;
+  margin: 5px auto 8px;
   border-radius: var(--border-radius-md);
   position: relative;
 }
@@ -28,4 +28,11 @@
 
 .flash.flash--error {
   background-color: var(--red);
+}
+
+@media only screen and (max-width: 42.5em) {
+  /* 600px */
+  .flash {
+    margin: 5px 10px;
+  }
 }

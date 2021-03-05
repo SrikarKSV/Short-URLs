@@ -28,3 +28,15 @@
 .links-table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
+
+@media only screen and (max-width: 37.5em) {
+  /* 600px */
+
+  .title {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+}
