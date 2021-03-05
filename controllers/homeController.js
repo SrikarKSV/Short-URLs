@@ -5,7 +5,10 @@ const UrlPage = require('../models/UrlPage');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.home = (req, res) => {
-  res.render('home');
+  res.render('home', {
+    url: `https://${req.headers.host}`,
+    description: 'Shrink your lengthy links and share for free!',
+  });
 };
 
 exports.checkShortenBody = (req, res, next) => {
@@ -61,9 +64,14 @@ exports.urlsPage = async (req, res, next) => {
   }
   const { urlIds } = shorturls;
   urlIds.forEach(
-    (urlId) => (urlId.urlId = `http://localhost:4000/${urlId.urlId}`)
+    (urlId) => (urlId.urlId = `https://${req.headers.host}/${urlId.urlId}`)
   );
-  res.render('links', { title: 'Links', urlIds });
+  res.render('links', {
+    title: 'Links',
+    urlIds,
+    url: `https://${req.headers.host}`,
+    description: 'Get the list of all the links you have shrinked!',
+  });
 };
 
 // Redirecting from the shortened link
