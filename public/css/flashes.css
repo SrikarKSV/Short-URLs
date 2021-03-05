@@ -1,0 +1,31 @@
+.flash {
+  max-width: 40rem;
+  margin: 5px auto;
+  border-radius: var(--border-radius-md);
+  position: relative;
+}
+
+.flash__remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-5px, 8px);
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.flash p {
+  margin-bottom: 0;
+  padding: 0.3em 1em;
+  font-size: 1.1rem;
+}
+
+.flash.flash--success {
+  background-color: var(--light-green);
+}
+
+.flash.flash--error {
+  background-color: var(--red);
+}
