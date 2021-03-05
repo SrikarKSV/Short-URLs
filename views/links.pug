@@ -1,6 +1,10 @@
 extends layout 
 
 include mixins/_short-links-table
+include mixins/_meta-tags
+
+block meta
+  +metaTags(url, description)
 
 block content
   h3.title List of the shortened link

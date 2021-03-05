@@ -1,5 +1,10 @@
 extends layout 
 
+include mixins/_meta-tags
+
+block meta
+  +metaTags(url, description)
+
 block content 
   form(method="post" class="form")
     .flash.flash--error.extra-links(hidden=true)
