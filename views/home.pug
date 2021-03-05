@@ -1,18 +1,18 @@
 extends layout 
 
 block content 
-  form(method="post")
-    label(for="url") Enter URL to shorten 
-    input(type="text", name="url" id="url" required value=urls)
-    h2 Choose expiry date 
-    label(for="perm") Permanent
+  form(method="post" class="form")
+    label(for="url") Enter URL(s) #[span.light (you can enter multiple by comma-separating them)]
+    input(type="text" name="url" id="url" placeholder="https://dev.to, https://github.com" required value=urls)
+    h5 Set expiry date for the shortened link 
     input(type="radio" name="expiryDate" id="perm" value="permanent" required)
-    br
-    label(for="custom") Custom
-    input(type="radio", name="expiryDate" id="custom" required)
-    label(for="datetime" hidden) Select Custom expiry date 
-    input(type="datetime-local" id="datetime" required disabled)
-    input(type="submit", value="Shorten URL →")
+    label(for="perm").expiry-label.expiry-label--perm Permanent
+    input(type="radio" name="expiryDate" id="custom" required)
+    label(for="custom").expiry-label.expiry-label--custom Custom
+    .custom-expiry-date
+      label(for="datetime" hidden) Select custom expiry date 
+      input(type="text" placeholder="Select date and time 📅" id="datetime" required disabled)
+    input(type="submit" value="Shorten URL →")
 
 block scripts 
-  script(src="js/form.js") 
+  script(src="dist/index.js") 
