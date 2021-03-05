@@ -5,6 +5,7 @@
   --black: #000;
   --light-green: #9ae6b4;
   --dark-green: #55c57a;
+  --red: #eb2f64;
   --border-radius-lg: 5px;
   --border-radius-md: 3px;
   --border-radius-sm: 2px;
@@ -80,4 +81,10 @@ input {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 400;
   border: none;
+}
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
