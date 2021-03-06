@@ -6,14 +6,14 @@ const allRadioBtn = document.querySelectorAll('input[type="radio"]');
 const customExpiryDateDiv = document.querySelector('.custom-expiry-date');
 const form = document.querySelector('.form');
 
-const isMoreThan10Present = false;
+let isMoreThan10Present = false;
 const moreThan10LinksHTML = `
   <div class="flash flash--error extra-links">
     <p>Don't shorten more than 10 links</p>
   </div>
 `;
 
-const ischooseExpiryPresent = false;
+let ischooseExpiryPresent = false;
 const chooseExpiryDateHTML = `
   <div class="flash flash--error enter-custom">
     <p>Please select expiry date!</p>
