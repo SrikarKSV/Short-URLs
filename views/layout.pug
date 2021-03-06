@@ -2,27 +2,33 @@ doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="preconnect" href="https://fonts.gstatic.com")
     link(href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet")
-    link(rel="stylesheet", href="/dist/index.css")
-    link(rel="shortcut icon", href="/img/favicon.png", type="image/x-icon")
+    link(rel="stylesheet" href="/dist/index.css")
+    link(rel="shortcut icon" href="/img/favicon.png" type="image/x-icon")
     block meta
     title #{title || "Home"} — Short URLs
   body 
     .container
-      h1: a(href="/")  short URLs
-      h4.tagline Shrink your lengthy links and share for free!
-      if locals.flashes 
-        - const categories = Object.keys(locals.flashes)
-        each category in categories
-          each message in flashes[category]
-            .flash(class=`flash--${category}`)
-              p= message
-              button.flash__remove(onClick="this.parentElement.remove()") &times;
-        
-      .inner
+      header
+        h1: a(href="/")  short URLs
+        h4.tagline Shrink your lengthy links and share for free!
+        if locals.flashes 
+          - const categories = Object.keys(locals.flashes)
+          each category in categories
+            each message in flashes[category]
+              .flash(class=`flash--${category}`)
+                p= message
+                button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+      main.inner
         block content
+
+      footer 
+        p Made with ❤️ by Srikar 
+        a(href='https://github.com/SrikarKSV/Short-URLs' title='GitHub' target='_blank' rel='noopener' aria-label='Open project on GitHub') #[img(src='/img/github.svg' alt='GitHub')]
+        a(href='https://twitter.com/SrikarVks' title='Twitter' target='_blank' rel='noopener' aria-label='Find me on Twitter') #[img(src='/img/twitter.svg' alt='Twitter')]
 
       block scripts
