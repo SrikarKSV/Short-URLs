@@ -19,7 +19,7 @@ block content
     label(for="custom").expiry-label.expiry-label--custom Custom
     .custom-expiry-date
       label(for="datetime" hidden) Select custom expiry date 
-      input(type="text" placeholder="Select date and time 📅" id="datetime" required disabled)
+      input#datetime(type="text" placeholder="Select date and time 📅" required)
     input(type="submit" value="Shorten URL →")
 
 block scripts 
