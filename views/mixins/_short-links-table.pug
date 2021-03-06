@@ -9,4 +9,4 @@ mixin table(urlIds)
         each url in urlIds
           tr
             td= url.url
-            td= url.urlId
+            td: a(href=url.urlId target="_blank" rel="noreferrer")= url.urlId  
