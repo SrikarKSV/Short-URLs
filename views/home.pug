@@ -7,19 +7,16 @@ block meta
 
 block content 
   form(method="post" class="form")
-    .flash.flash--error.extra-links(hidden=true)
-      p Don't shorten more than 10 links
-      button.flash__remove(onClick="this.parentElement.remove()") &times;
     label(for="url") Enter URL(s) #[span.light (you can enter multiple by comma-separating them)]
     input(type="text" name="url" id="url" placeholder="https://dev.to, https://github.com" required value=urls)
     h5 Set expiry date for the shortened link 
-    input(type="radio" name="expiryDate" id="perm" value="permanent" required)
+    input(type="radio" name="expiryDate" id="perm" value="permanent")
     label(for="perm").expiry-label.expiry-label--perm Permanent
-    input(type="radio" name="expiryDate" id="custom" required)
+    input(type="radio" name="expiryDate" id="custom")
     label(for="custom").expiry-label.expiry-label--custom Custom
     .custom-expiry-date
       label(for="datetime" hidden) Select custom expiry date 
-      input#datetime(type="text" placeholder="Select date and time 📅" required)
+      input#datetime(type="text" placeholder="Select date and time 📅")
     input(type="submit" value="Shorten URL →")
 
 block scripts 
