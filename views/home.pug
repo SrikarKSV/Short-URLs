@@ -7,6 +7,10 @@ block meta
 
 block content 
   form(method="post" class="form")
+    .flash.flash--error.extra-links(hidden=true)
+      p Don't shorten more than 10 links
+    .flash.flash--error.enter-custom(hidden=true)
+      p Please select expiry date!
     label(for="url") Enter URL(s) #[span.light (you can enter multiple by comma-separating them)]
     input(type="text" name="url" id="url" placeholder="https://dev.to, https://github.com" required value=urls)
     h5 Set expiry date for the shortened link 
