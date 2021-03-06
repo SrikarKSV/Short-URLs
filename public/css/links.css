@@ -13,6 +13,11 @@
 .links-table {
   margin-top: 2rem;
   margin: auto;
+  border: 2px solid var(--black);
+}
+
+.links-table a {
+  text-decoration: none;
 }
 
 .links-table th,
@@ -27,6 +32,11 @@
 
 .links-table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
+}
+
+.small-screen {
+  margin-top: 2rem;
+  text-align: center;
 }
 
 @media only screen and (max-width: 37.5em) {

@@ -11,6 +11,8 @@ block content
   p ⚠️ #[span.warning Note : ] This page will only be available for 24 hours (links expire as configured)
   if urlIds && urlIds.length 
     +table(urlIds)   
+    .small-screen
+      p 👆 Scroll right if you can't reach shortened URL
   else 
     h4 Oops! Seems like the links expired already!
 
